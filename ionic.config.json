@@ -1,0 +1,7 @@
+{
+  "name": "authSystemIonicVue",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}
