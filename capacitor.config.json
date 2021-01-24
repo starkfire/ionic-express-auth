@@ -1,9 +1,9 @@
 {
   "appId": "io.ionic.starter",
-  "appName": "authSystemIonicVue",
+  "appName": "ionicApp",
   "bundledWebRuntime": false,
   "npmClient": "npm",
-  "webDir": "dist",
+  "webDir": "www",
   "plugins": {
     "SplashScreen": {
       "launchShowDuration": 0

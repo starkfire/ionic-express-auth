@@ -1,7 +1,7 @@
 {
-  "name": "authSystemIonicVue",
+  "name": "ionicApp",
   "integrations": {
     "capacitor": {}
   },
-  "type": "vue"
+  "type": "angular"
 }
