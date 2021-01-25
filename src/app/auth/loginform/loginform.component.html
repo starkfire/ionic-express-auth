@@ -1,0 +1,12 @@
+<form [formGroup]="login" (ngSubmit)="onSubmit()">
+  <ion-item>
+    <ion-label>Username</ion-label>
+    <ion-input formControlName="username" type="text"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Password</ion-label>
+    <ion-input formControlName="password" type="password"></ion-input>
+  </ion-item>
+  <ion-button [disabled]="!login.valid" expand="full" color="secondary" type="submit">Submit</ion-button>
+  <p>Don't have an account? <a [routerLink]="['/auth/signup']">Sign up</a> instead.</p>
+</form>
