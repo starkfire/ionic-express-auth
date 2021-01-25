@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { AuthService } from '../../api/auth.service';
-import { AlertController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
 @Component({
@@ -16,7 +16,7 @@ export class LoginformComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    public alertController: AlertController,
+    public toastController: ToastController,
     private router: Router
   ) {
     this.login = this.formBuilder.group({
@@ -27,14 +27,15 @@ export class LoginformComponent implements OnInit {
 
   ngOnInit() {}
 
-  async presentAlert() {
-    const alert = await this.alertController.create({
-      header: 'Error',
-      message: 'Invalid username or password',
-      buttons: ['OK']
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Invalid Username or Password',
+      position: 'bottom',
+      color: 'danger',
+      duration: 2000
     })
 
-    await alert.present()
+    toast.present()
   }
 
   onSubmit(): void {
@@ -48,7 +49,7 @@ export class LoginformComponent implements OnInit {
         }
       }, err => {
         console.log(err)
-        this.presentAlert()
+        this.presentToast()
       })
   }
 

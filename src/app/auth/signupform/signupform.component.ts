@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { AlertController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 import { AuthService } from '../../api/auth.service';
 import { Router } from '@angular/router';
 
@@ -15,7 +15,7 @@ export class SignupformComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    public alertController: AlertController,
+    public toastController: ToastController,
     private authService: AuthService,
     private router: Router
   ) {
@@ -28,19 +28,20 @@ export class SignupformComponent implements OnInit {
 
   ngOnInit() {}
 
-  async presentAlert(msg: string) {
-    const alert = await this.alertController.create({
-      header: 'Error',
+  async presentToast(msg: string) {
+    const toast = await this.toastController.create({
       message: msg,
-      buttons: ['OK']
+      position: 'bottom',
+      color: 'danger',
+      duration: 2000
     })
 
-    await alert.present()
+    toast.present()
   }
 
   onSubmit(): void {
     if (this.signup.value.password !== this.signup.value.confirm) {
-      this.presentAlert('Passwords do not match')
+      this.presentToast('Passwords do not match')
     } else {
       const { username, password } = this.signup.value
 
@@ -52,7 +53,7 @@ export class SignupformComponent implements OnInit {
           }
         }, err => {
           console.log(err)
-          this.presentAlert('Username already taken')
+          this.presentToast('Username already taken')
         })
     }
   }
