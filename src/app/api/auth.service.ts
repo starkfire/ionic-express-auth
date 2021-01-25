@@ -21,6 +21,11 @@ export class AuthService {
     return !this.jwtHelper.isTokenExpired(token)
   }
 
+  public getToken(): string {
+    const token = localStorage.getItem('token')
+    return token
+  }
+
   login(username: string, password: string): Observable<any> {
     const data = { username, password }
 
