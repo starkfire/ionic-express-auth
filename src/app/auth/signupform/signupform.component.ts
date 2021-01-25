@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
+import { AuthService } from '../../api/auth.service';
 
 @Component({
   selector: 'app-signupform',
@@ -13,7 +14,8 @@ export class SignupformComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    public alertController: AlertController
+    public alertController: AlertController,
+    private authService: AuthService
   ) {
     this.signup = this.formBuilder.group({
       username: ['', Validators.required],
@@ -37,9 +39,14 @@ export class SignupformComponent implements OnInit {
   onSubmit(): void {
     if (this.signup.value.password !== this.signup.value.confirm) {
       this.presentAlert()
-    }
+    } else {
+      const { username, password } = this.signup.value
 
-    console.log('Form Submitted', this.signup.value)
+      this.authService.signup(username, password)
+        .subscribe(resp => {
+          localStorage.setItem('token', resp.body.token)
+        })
+    }
   }
 
 }
