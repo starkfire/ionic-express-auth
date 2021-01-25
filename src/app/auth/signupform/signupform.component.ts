@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { AuthService } from '../../api/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signupform',
@@ -15,7 +16,8 @@ export class SignupformComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     public alertController: AlertController,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {
     this.signup = this.formBuilder.group({
       username: ['', Validators.required],
@@ -46,6 +48,7 @@ export class SignupformComponent implements OnInit {
         .subscribe(resp => {
           if (('token' in resp.body) && (resp.status == 200)) {
             localStorage.setItem('token', resp.body.token)
+            this.router.navigateByUrl('/home')
           }
         }, err => {
           console.log(err)

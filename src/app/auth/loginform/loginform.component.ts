@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { AuthService } from '../../api/auth.service';
 import { AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-loginform',
@@ -15,7 +16,8 @@ export class LoginformComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    public alertController: AlertController
+    public alertController: AlertController,
+    private router: Router
   ) {
     this.login = this.formBuilder.group({
       username: ['', Validators.required],
@@ -42,6 +44,7 @@ export class LoginformComponent implements OnInit {
       .subscribe(resp => {
         if (('token' in resp.body) && (resp.status == 200)) {
           localStorage.setItem('token', resp.body.token)
+          this.router.navigateByUrl('/home')
         }
       }, err => {
         console.log(err)
