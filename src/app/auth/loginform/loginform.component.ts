@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { AuthService } from '../../api/auth.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-loginform',
@@ -13,7 +14,8 @@ export class LoginformComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    public alertController: AlertController
   ) {
     this.login = this.formBuilder.group({
       username: ['', Validators.required],
@@ -23,13 +25,27 @@ export class LoginformComponent implements OnInit {
 
   ngOnInit() {}
 
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Error',
+      message: 'Invalid username or password',
+      buttons: ['OK']
+    })
+
+    await alert.present()
+  }
+
   onSubmit(): void {
-    console.log('Form Submitted', this.login.value)
     const { username, password } = this.login.value
 
     this.authService.login(username, password)
       .subscribe(resp => {
-        localStorage.setItem('token', resp.body.token)
+        if (('token' in resp.body) && (resp.status == 200)) {
+          localStorage.setItem('token', resp.body.token)
+        }
+      }, err => {
+        console.log(err)
+        this.presentAlert()
       })
   }
 

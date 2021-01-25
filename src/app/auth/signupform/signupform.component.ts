@@ -26,10 +26,10 @@ export class SignupformComponent implements OnInit {
 
   ngOnInit() {}
 
-  async presentAlert() {
+  async presentAlert(msg: string) {
     const alert = await this.alertController.create({
       header: 'Error',
-      message: 'Passwords do not match',
+      message: msg,
       buttons: ['OK']
     })
 
@@ -38,13 +38,18 @@ export class SignupformComponent implements OnInit {
 
   onSubmit(): void {
     if (this.signup.value.password !== this.signup.value.confirm) {
-      this.presentAlert()
+      this.presentAlert('Passwords do not match')
     } else {
       const { username, password } = this.signup.value
 
       this.authService.signup(username, password)
         .subscribe(resp => {
-          localStorage.setItem('token', resp.body.token)
+          if (('token' in resp.body) && (resp.status == 200)) {
+            localStorage.setItem('token', resp.body.token)
+          }
+        }, err => {
+          console.log(err)
+          this.presentAlert('Username already taken')
         })
     }
   }
