@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { AuthService } from '../../api/auth.service';
-import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-loginform',
