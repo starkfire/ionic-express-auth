@@ -19,7 +19,9 @@ export class HomePage implements OnInit {
   ngOnInit() {
     this.logs.getLogs()
       .subscribe(resp => {
-        this.results = resp.body.logs
+        let entries = resp.body.logs
+
+        this.results = entries.reverse()
       }, err => {
         console.log(err)
       })
