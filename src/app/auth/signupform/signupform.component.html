@@ -1,14 +1,14 @@
 <form [formGroup]="signup" (ngSubmit)="onSubmit()">
   <ion-item>
-    <ion-label>Username</ion-label>
+    <ion-label position="stacked">Username</ion-label>
     <ion-input formControlName="username" type="text" required="true"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-label>Password</ion-label>
+    <ion-label position="stacked">Password</ion-label>
     <ion-input formControlName="password" type="password" required="true"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-label>Confirm</ion-label>
+    <ion-label position="stacked">Confirm</ion-label>
     <ion-input formControlName="confirm" type="password" required="true"></ion-input>
   </ion-item>
   <ion-button [disabled]="!signup.valid" expand="full" color="secondary" type="submit">Submit</ion-button>
