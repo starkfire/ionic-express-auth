@@ -27,9 +27,9 @@ export class LoginformComponent implements OnInit {
 
   ngOnInit() {}
 
-  async presentToast() {
+  async presentToast(msg: string) {
     const toast = await this.toastController.create({
-      message: 'Invalid Username or Password',
+      message: msg,
       position: 'bottom',
       color: 'danger',
       duration: 2000
@@ -48,8 +48,11 @@ export class LoginformComponent implements OnInit {
           this.router.navigateByUrl('/home')
         }
       }, err => {
-        console.log(err)
-        this.presentToast()
+        if (err.status == 401) {
+          this.presentToast('Invalid Username or Password')
+        } else {
+          this.presentToast('Connection Error')
+        }
       })
   }
 
