@@ -2,17 +2,19 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Platform } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  AUTH_API_URL = 'http://localhost:3000/api/auth'
+  AUTH_API_URL = (this.platform.is('desktop')) ? 'http://localhost:3000/api/auth' : 'http://10.0.2.2:3000/api/auth'
 
   constructor(
     private http: HttpClient,
-    public jwtHelper: JwtHelperService
+    public jwtHelper: JwtHelperService,
+    public platform: Platform
   ) { }
 
   public isAuthenticated(): boolean {
