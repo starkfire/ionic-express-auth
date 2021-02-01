@@ -16,7 +16,16 @@ const routes: Routes = [
     path: 'home',
     loadChildren: () => import('./home/home.module').then(m => m.HomePageModule),
     canActivate: [AuthguardService]
+  },
+  {
+    path: 'sensors',
+    loadChildren: () => import('./sensors/sensors.module').then( m => m.SensorsPageModule)
+  },
+  {
+    path: 'userlogs',
+    loadChildren: () => import('./userlogs/userlogs.module').then( m => m.UserlogsPageModule)
   }
+
 ];
 
 @NgModule({
