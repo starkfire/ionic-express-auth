@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { LogsService } from '../logs/logs.service';
 
 @Component({
   selector: 'app-home',
@@ -9,26 +7,7 @@ import { LogsService } from '../logs/logs.service';
 })
 export class HomePage implements OnInit {
 
-  public results: Array<object> = []
+  constructor() {}
 
-  constructor(
-    private router: Router,
-    private logs: LogsService
-  ) {}
-
-  ngOnInit() {
-    this.logs.getLogs()
-      .subscribe(resp => {
-        let entries = resp.body.logs
-
-        this.results = entries.reverse()
-      }, err => {
-        console.log(err)
-      })
-  }
-
-  logout(): void {
-    localStorage.removeItem('token')
-    this.router.navigateByUrl('/')
-  }
+  ngOnInit(){}
 }

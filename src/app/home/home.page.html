@@ -1,24 +1,15 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Logs
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-tabs>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Logs</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-button expand="full" color="danger" (click)="logout()">Logout</ion-button>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="tab1">
+      <ion-icon name="hardware-chip-outline"></ion-icon>
+      <ion-label>Sensors</ion-label>
+    </ion-tab-button>
 
-  <div class="logsContainer">
-    <ion-item *ngFor="let item of results">
-      <ion-label text-wrap>{{ item.username }}</ion-label>
-      <ion-label text-wrap>{{ item.time }}</ion-label>
-      <ion-label text-wrap>{{ item.date }}</ion-label>
-    </ion-item>
-  </div>
-</ion-content>
+    <ion-tab-button tab="tab2">
+      <ion-icon name="ellipse"></ion-icon>
+      <ion-label>Logs</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+
+</ion-tabs>
