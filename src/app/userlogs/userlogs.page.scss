@@ -1,0 +1,15 @@
+ion-button {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 10%;
+    margin: 0;
+}
+
+.logsContainer {
+    padding: 5% 5% 20% 5%;
+}
+
+ion-item {
+    z-index: -1;
+}
