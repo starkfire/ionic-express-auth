@@ -9,7 +9,7 @@ import { Platform } from '@ionic/angular';
 })
 export class LogsService {
 
-  LOGS_API_URL = (this.platform.is('desktop')) ? 'http://localhost:3000/api/logs' : 'http://10.0.2.2:3000/api/logs'
+  LOGS_API_URL = (this.platform.is('desktop')) ? 'http://localhost:3005/api/logs' : 'http://10.0.2.2:3005/api/logs'
 
   constructor(
     private http: HttpClient,
